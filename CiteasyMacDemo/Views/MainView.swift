@@ -25,29 +25,9 @@ struct MainView: View {
             case .settings:
                 SettingsView()
             }
-
-
-            // → 선택된 탭에 따라 메인 콘텐츠 변경
-//            Group {
-//                switch selectedTab {
-//                case .library:
-//                    ReferenceListView()
-//                case .citationStyle:
-//                    CitationStyleView()
-//                case .settings:
-//                    SettingsView()
-//                case .reload:
-//                    ReloadView()
-//                case .help:
-//                    HelpView()
-//                }
-//            }
-//            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
-
-
 
 #Preview {
     MainView()
