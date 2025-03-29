@@ -105,11 +105,3 @@ private let sampleReferences = [
     LibraryView()
         .frame(width: 600, height: 600)
 }
-
-private let sampleReferences = [
-    (title: "SwiftUI 앱 개발", author: "홍길동 · 2024"),
-    (title: "iOS 비동기 처리", author: "김철수 · 2023"),
-    (title: "애플 생태계와 Swift", author: "이영희 · 2022"),
-    (title: "Combine과 MVVM", author: "박지민 · 2021"),
-    (title: "iPadOS와 멀티태스킹", author: "최윤서 · 2020")
-]
