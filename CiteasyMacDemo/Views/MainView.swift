@@ -8,39 +8,26 @@
 import SwiftUI
 
 struct MainView: View {
-    @StateObject var viewModel = ReferenceViewModel()
-
-    @State private var selectedItem: ReferenceItem?
-    @State private var selectedStyle = "APA"
-    @State private var selectedLanguage = "국문"
-    @State private var selectedSort = "작성일순"
+    @State private var selectedTab: SidebarTab = .library
 
     var body: some View {
         HStack(spacing: 0) {
-            VStack(alignment: .leading, spacing: 0) {
-                TopToolbarView()
-                Divider()
-
-                ReferenceListView(
-                    items: viewModel.references,
-                    onCite: { item in
-                        viewModel.handleCitation(for: item)
-                    }
-                )
-                .onTapGesture {
-                    // 더 정교한 바인딩이 필요하면 ForEach 내부에 직접 onTapGesture 삽입
-                }
-            }
-            .frame(minWidth: 500)
+            SidebarView(selectedTab: $selectedTab)
+                .frame(width: 120)
 
             Divider()
 
-            ReferenceDetailView(item: selectedItem)
+            switch selectedTab {
+            case .library:
+                LibraryView()
+            case .citationStyle:
+                CitationStyleView()
+            case .settings:
+                SettingsView()
+            }
         }
-        .frame(minWidth: 800, minHeight: 500)
     }
 }
-
 
 #Preview {
     MainView()
