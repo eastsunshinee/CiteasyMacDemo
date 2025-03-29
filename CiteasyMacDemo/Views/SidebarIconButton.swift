@@ -8,40 +8,25 @@
 import SwiftUI
 
 struct SidebarIconButton: View {
-    let title: String
-    let icon: String
-    var isSelected: Bool
-    var useBackground: Bool = false
-    var action: () -> Void
+    let tab: SidebarTab
+    let isSelected: Bool
+    let action: () -> Void
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 6) {
-                Image(systemName: icon)
-                    .font(.system(size: 20, weight: .bold))
-                    .frame(width: 44, height: 44)
-                    .background(
-                        useBackground ? Color.indigo : Color.clear
-                    )
-                    .foregroundColor(useBackground ? .white : .primary)
-                    .cornerRadius(12)
-
-                Text(title)
-                    .font(.system(size: 12, weight: .semibold))
-                    .foregroundColor(.primary)
+            VStack(spacing: 4) {
+                Image(systemName: tab.iconName)
+                    .font(.system(size: 18, weight: .semibold))
+                Text(tab.rawValue)
+                    .font(.system(size: 13, weight: .semibold))
             }
+            .foregroundColor(isSelected ? .white : .gray)
+            .padding(.vertical, 10)
+            .padding(.horizontal, 6)
             .frame(maxWidth: .infinity)
+            .background(isSelected ? Color.accentColor : Color.clear)
+            .cornerRadius(10)
         }
         .buttonStyle(.plain)
     }
-}
-
-#Preview {
-    SidebarIconButton(
-        title: "도움말",
-        icon: "questionmark.circle",
-        isSelected: false,
-        action: {}
-    )
-
 }
