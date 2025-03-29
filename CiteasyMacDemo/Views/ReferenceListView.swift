@@ -35,8 +35,8 @@ struct ReferenceListView: View {
 #Preview {
     ReferenceListView(
         items: [
-            ReferenceItem(title: "Swift의 이해", author: "홍길동", year: "2023"),
-            ReferenceItem(title: "iOS 프로그래밍", author: "김개발", year: "2024")
+            ReferenceItem(title: "Swift의 이해", author: "홍길동", year: "2023", isSelected: false),
+            ReferenceItem(title: "iOS 프로그래밍", author: "김개발", year: "2024", isSelected: false)
         ],
         onCite: { _ in }
     )
