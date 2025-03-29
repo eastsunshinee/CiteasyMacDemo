@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct ReferenceItem: Identifiable {
+struct ReferenceItem: Identifiable, Hashable {
     let id = UUID()
     let title: String
     let author: String
     let year: String
-    let isSelected: Bool
+
     var citationText: String {
-        "[\(author), \(year)]"
+        "\(author) (\(year)). \(title)."
     }
 }
