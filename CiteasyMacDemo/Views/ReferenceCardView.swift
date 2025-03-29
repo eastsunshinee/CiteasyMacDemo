@@ -9,37 +9,50 @@ import SwiftUI
 
 struct ReferenceCardView: View {
     let item: ReferenceItem
+    let isSelected: Bool
+    let onToggle: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(item.title)
-                .font(.headline)
-                .foregroundStyle(.primary)
-                .lineLimit(1)
+        HStack(alignment: .top, spacing: 8) {
+            // 체크박스
+            Image(systemName: isSelected ? "checkmark.square.fill" : "square")
+                .foregroundColor(isSelected ? .accentColor : .secondary)
+                .onTapGesture { onToggle() }
 
-            Text("\(item.author) · \(item.year)")
-                .font(.subheadline)
-                .foregroundStyle(.secondary)
-                .lineLimit(1)
+            // 본문 텍스트
+            VStack(alignment: .leading, spacing: 2) {
+                Text(item.title)
+                    .font(.body)
+                    .foregroundColor(.primary)
+                    .lineLimit(2)
+
+                Text("\(item.author) • \(item.year)")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+            }
+
+            Spacer()
         }
-        .padding()
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(item.isSelected ? Color.accentColor.opacity(0.15) : Color(NSColor.controlBackgroundColor))
-        .cornerRadius(8)
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(item.isSelected ? Color.accentColor : Color.gray.opacity(0.3), lineWidth: item.isSelected ? 2 : 1)
-        )
+        .padding(.vertical, 6)
+        .padding(.horizontal, 4)
         .contentShape(Rectangle())
+        .background(isSelected ? Color.accentColor.opacity(0.1) : Color.clear)
     }
 }
 
-#Preview(traits: .sizeThatFitsLayout) {
-    VStack(spacing: 12) {
-        ReferenceCardView(item: .init(title: "SwiftUI에서 macOS 앱 만들기", author: "김동현", year: "2024", isSelected: true))
-        ReferenceCardView(item: .init(title: "iOS 개발자를 위한 macOS 전환 가이드", author: "홍길동", year: "2023", isSelected: false))
+#Preview {
+    VStack(alignment: .leading) {
+        ReferenceCardView(
+            item: ReferenceItem(title: "SwiftUI 앱 개발", author: "홍길동", year: "2024"),
+            isSelected: true,
+            onToggle: {}
+        )
+        ReferenceCardView(
+            item: ReferenceItem(title: "iOS 비동기 처리", author: "김철수", year: "2023"),
+            isSelected: false,
+            onToggle: {}
+        )
     }
     .padding()
-    .frame(width: 360)
-    .background(Color(NSColor.windowBackgroundColor))
+    .frame(width: 400)
 }
