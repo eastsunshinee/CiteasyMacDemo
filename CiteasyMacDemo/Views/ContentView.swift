@@ -39,12 +39,11 @@ tell application "System Events"
     end tell
 end tell
 """
-
-        var error: NSDictionary?
         if let script = NSAppleScript(source: appleScript) {
+            var error: NSDictionary?
             script.executeAndReturnError(&error)
             if let error = error {
-                print("AppleScript Error: \\(error)")
+                print("AppleScript Error: \(error)") // 이 줄이 없으면 경고
             }
         }
     }

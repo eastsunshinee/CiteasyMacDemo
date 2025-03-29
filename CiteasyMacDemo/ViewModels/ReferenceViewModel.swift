@@ -9,8 +9,8 @@ import Foundation
 
 class ReferenceViewModel: ObservableObject {
     @Published var references: [ReferenceItem] = [
-        ReferenceItem(title: "SwiftUI 앱 개발", author: "홍길동", year: "2024"),
-        ReferenceItem(title: "iOS 비동기 처리", author: "김철수", year: "2023")
+        ReferenceItem(title: "SwiftUI 앱 개발", author: "홍길동", year: "2024", isSelected: false),
+        ReferenceItem(title: "iOS 비동기 처리", author: "김철수", year: "2023", isSelected: false)
     ]
 
     func handleCitation(for item: ReferenceItem) {

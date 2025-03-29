@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct ReferenceItem: Identifiable, Codable {
-    var id: UUID = UUID()
-    var title: String
-    var author: String
-    var year: String
-
+struct ReferenceItem: Identifiable {
+    let id = UUID()
+    let title: String
+    let author: String
+    let year: String
+    let isSelected: Bool
     var citationText: String {
-        return "[\(author)(\(year))] \(title)"
+        "[\(author), \(year)]"
     }
 }

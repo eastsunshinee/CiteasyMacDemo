@@ -10,26 +10,37 @@ import SwiftUI
 struct MainView: View {
     @StateObject var viewModel = ReferenceViewModel()
 
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text("내 서재")
-                .font(.largeTitle)
-                .padding(.top)
+    @State private var selectedItem: ReferenceItem?
+    @State private var selectedStyle = "APA"
+    @State private var selectedLanguage = "국문"
+    @State private var selectedSort = "작성일순"
 
-            ScrollView {
-                LazyVStack(alignment: .leading, spacing: 12) {
-                    ForEach(viewModel.references) { item in
-                        ReferenceCardView(item: item) { selected in
-                            viewModel.handleCitation(for: selected)
-                        }
+    var body: some View {
+        HStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 0) {
+                TopToolbarView()
+                Divider()
+
+                ReferenceListView(
+                    items: viewModel.references,
+                    onCite: { item in
+                        viewModel.handleCitation(for: item)
                     }
+                )
+                .onTapGesture {
+                    // 더 정교한 바인딩이 필요하면 ForEach 내부에 직접 onTapGesture 삽입
                 }
-                .padding()
             }
+            .frame(minWidth: 500)
+
+            Divider()
+
+            ReferenceDetailView(item: selectedItem)
         }
-        .frame(minWidth: 500, minHeight: 400)
+        .frame(minWidth: 800, minHeight: 500)
     }
 }
+
 
 #Preview {
     MainView()
