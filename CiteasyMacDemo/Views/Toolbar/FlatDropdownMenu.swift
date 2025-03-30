@@ -38,14 +38,20 @@ struct FlatDropdownMenu<LabelView: View>: View {
     }
 }
 
-#Preview("FlatDropdownMenu") {
-    @State var current = "최신 북마크순"
-    return FlatDropdownMenu(
-        options: ["기본", "최신 북마크순", "가나다순"],
-        selected: $current
-    ) {
-        Text(current)
+#Preview("FlatDropdownMenu", traits: .sizeThatFitsLayout) {
+    struct PreviewWrapper: View {
+        @State var current = "최신 북마크순"
+
+        var body: some View {
+            FlatDropdownMenu(
+                options: ["기본", "최신 북마크순", "가나다순"],
+                selected: $current
+            ) {
+                Text(current)
+            }
+            .padding()
+        }
     }
-    .padding()
-    .previewLayout(.sizeThatFits)
+
+    return PreviewWrapper()
 }

@@ -42,6 +42,5 @@ struct PrimaryActionButton: View {
     }
     .padding()
     .background(Color.black)
-    .previewLayout(.sizeThatFits)
 }
 
