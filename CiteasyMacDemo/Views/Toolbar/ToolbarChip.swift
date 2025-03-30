@@ -45,5 +45,4 @@ struct ToolbarChip: View {
         ToolbarChip(label: "IEEE", isActive: true, action: { print("Tapped") })
     }
     .padding()
-    .previewLayout(.sizeThatFits)
 }

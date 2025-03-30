@@ -28,5 +28,4 @@ struct CapsuleButton: View {
         CapsuleButton(label: "영문", isSelected: false)
     }
     .padding()
-    .previewLayout(.sizeThatFits)
 }

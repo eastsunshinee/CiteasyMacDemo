@@ -7,13 +7,25 @@
 
 import Foundation
 import SwiftUI
+import AppKit
 
 class ReferenceViewModel: ObservableObject {
     // 전체 참고문헌 리스트
     @Published var references: [ReferenceItem] = [
-        .init(title: "SwiftUI 앱 개발", author: "홍길동", year: "2024"),
-        .init(title: "iOS 비동기 처리", author: "김철수", year: "2023"),
-        .init(title: "Combine과 MVVM", author: "박지민", year: "2022")
+        .init(title: "Understanding SwiftUI: A Declarative Approach to UI Development",
+              author: "John Sundell", year: "2023"),
+
+            .init(title: "Modern Concurrency in iOS: Async/Await in Practice",
+                  author: "Donny Wals", year: "2022"),
+
+            .init(title: "Design Patterns in Swift: MVC, MVVM, and Beyond",
+                  author: "Antoine van der Lee", year: "2024"),
+
+            .init(title: "The Combine Framework Explained",
+                  author: "Paul Hudson", year: "2021"),
+
+            .init(title: "Building Accessible macOS Apps with SwiftUI",
+                  author: "Majid Jabrayilov", year: "2023")
     ]
 
     // 선택된 ReferenceItem의 UUID
@@ -33,10 +45,6 @@ class ReferenceViewModel: ObservableObject {
     // 액션
     func generateCitation() {
         print("참고문헌 생성 실행")
-    }
-
-    func handleCitation(for item: ReferenceItem) {
-        print("인용 처리: \(item.title)")
     }
 
     func toggleSelection(for item: ReferenceItem) {
@@ -61,4 +69,60 @@ class ReferenceViewModel: ObservableObject {
         vm.selectedItems = Set([vm.references.first?.id].compactMap { $0 })
         return vm
     }
+}
+
+extension ReferenceViewModel {
+    func handleCitation(for item: ReferenceItem, targetApp: CitationTarget = .pages) {
+        let citationText = "[\(item.author)(\(item.year))]"
+
+        let pasteboard = NSPasteboard.general
+        pasteboard.clearContents()
+        pasteboard.setString(citationText, forType: .string)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            let appleScript: String
+
+            switch targetApp {
+            case .pages:
+                appleScript = """
+                tell application "Pages"
+                    activate
+                end tell
+                delay 0.4
+                tell application "System Events"
+                    tell process "Pages"
+                        click menu item "붙여넣기" of menu "편집" of menu bar 1
+                    end tell
+                end tell
+                """
+
+            case .word:
+                appleScript = """
+                tell application "Microsoft Word"
+                    activate
+                end tell
+                delay 0.4
+                tell application "System Events"
+                    tell process "Microsoft Word"
+                        click menu item "붙여넣기" of menu "편집" of menu bar 1
+                    end tell
+                end tell
+                """
+            }
+
+            if let script = NSAppleScript(source: appleScript) {
+                var error: NSDictionary?
+                script.executeAndReturnError(&error)
+                if let error = error {
+                    print("AppleScript Error: \(error)")
+                }
+            }
+        }
+    }
+
+    enum CitationTarget {
+        case pages
+        case word
+    }
+
 }

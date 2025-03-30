@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+import SwiftUI
+
 struct ReferenceCardView: View {
     let item: ReferenceItem
     let isSelected: Bool
@@ -19,15 +21,14 @@ struct ReferenceCardView: View {
                 .foregroundColor(isSelected ? .accentColor : .secondary)
                 .onTapGesture { onToggle() }
 
-            // 본문 텍스트
             VStack(alignment: .leading, spacing: 2) {
                 Text(item.title)
-                    .font(.body)
+                    .font(.title3.bold()) // 🆙 강조 (기존보다 크게)
                     .foregroundColor(.primary)
                     .lineLimit(2)
 
                 Text("\(item.author) • \(item.year)")
-                    .font(.caption)
+                    .font(.footnote)
                     .foregroundColor(.secondary)
             }
 

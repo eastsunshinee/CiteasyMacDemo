@@ -31,5 +31,4 @@ struct FlatButton: View {
         FlatButton(label: "참고문헌 추가") {}
     }
     .padding()
-    .previewLayout(.sizeThatFits)
 }

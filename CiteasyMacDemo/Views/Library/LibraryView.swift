@@ -15,14 +15,13 @@ struct LibraryView: View {
             VStack(spacing: 0) {
                 TopToolbarView(viewModel: viewModel)
 
-                // ✅ 참조 리스트 뷰로 교체
                 ReferenceListView(
                     items: viewModel.references,
                     selectedItems: viewModel.selectedItems,
                     onToggle: { viewModel.toggleSelection(for: $0) },
                     onCite: { viewModel.handleCitation(for: $0) }
                 )
-                .background(Color(NSColor.textBackgroundColor)) // ✅ 다크/라이트 대응 배경
+                .background(Color(NSColor.textBackgroundColor))
             }
 
             if !viewModel.selectedReferenceItems.isEmpty {
@@ -35,12 +34,13 @@ struct LibraryView: View {
                         for item in viewModel.selectedReferenceItems {
                             viewModel.handleCitation(for: item)
                         }
+
                         withAnimation {
                             viewModel.selectedItems.removeAll()
                         }
                     }
                 )
-                .transition(.move(edge: .bottom).combined(with: .opacity)) // ✅ 애니메이션
+                .transition(.move(edge: .bottom).combined(with: .opacity))
                 .animation(.easeInOut, value: viewModel.selectedItems)
             }
         }

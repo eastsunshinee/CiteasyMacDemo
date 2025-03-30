@@ -15,12 +15,12 @@ struct SearchInputField: View {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.secondary)
 
-            TextField("키워드, 저널, 학회, 저자 등으로 검색", text: $text)
+            TextField("검색어를 입력하세요", text: $text)
                 .textFieldStyle(.plain)
         }
         .padding(.horizontal, 10)
         .padding(.vertical, 6)
-        .background(Color(NSColor.controlBackgroundColor))
+        .background(Color.gray.opacity(0.1))
         .cornerRadius(8)
         .overlay(
             RoundedRectangle(cornerRadius: 8)
@@ -30,9 +30,15 @@ struct SearchInputField: View {
     }
 }
 
-#Preview("SearchInputField") {
-    @State var query: String = ""
-    return SearchInputField(text: $query)
-        .padding()
-        .previewLayout(.sizeThatFits)
+#Preview(traits: .sizeThatFitsLayout) {
+    struct PreviewWrapper: View {
+        @State var query = ""
+
+        var body: some View {
+            SearchInputField(text: $query)
+                .padding()
+        }
+    }
+
+    return PreviewWrapper()
 }
