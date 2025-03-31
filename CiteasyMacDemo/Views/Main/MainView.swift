@@ -19,7 +19,7 @@ struct MainView: View {
 
             switch selectedTab {
             case .library:
-                LibraryView()
+                LibraryView(viewModel: ReferenceViewModel())
             case .citationStyle:
                 CitationStyleView()
             case .settings:

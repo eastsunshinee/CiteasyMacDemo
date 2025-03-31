@@ -54,7 +54,7 @@ struct ReferenceDetailView: View {
 
 #Preview {
     ReferenceDetailView(
-        item: ReferenceItem(title: "SwiftUI 앱 개발", author: "홍길동", year: "2024", isSelected: false)
+        item: ReferenceItem(title: "SwiftUI 앱 개발", author: "홍길동", year: "2024")
     )
     .frame(height: 300)
 }
