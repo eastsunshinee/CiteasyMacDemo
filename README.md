@@ -11,7 +11,7 @@ Windows 앱 '싸이티지'의 일부 기능을 macOS 환경에서 재현한 포�
 ## 📽️ 시연 영상
 
 [![Demo](CiteasyMacDemo/screenshots/video_thumb.png)](https://youtu.be/G7nllkJsRis)
-[시연 영상 보기](https://youtu.be/G7nllkJsRis)
+[시연 영상 보기](https://youtu.be/XchMb40ItzE)
 > 클릭하면 유튜브에서 인용 기능 시연 영상을 확인할 수 있습니다.
 
 ## 🛠️ 기술 스택
